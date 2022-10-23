@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ООАиП\\SpaceBattle.Lib\\SpaceBattle.Lib.csproj": {}
+    "C:\\Users\\Daniil\\Desktop\\ghjuf\\Spaceship\\SpaceBattle.Lib\\SpaceBattle.Lib.csproj": {}
   },
   "projects": {
-    "D:\\ООАиП\\SpaceBattle.Lib\\SpaceBattle.Lib.csproj": {
+    "C:\\Users\\Daniil\\Desktop\\ghjuf\\Spaceship\\SpaceBattle.Lib\\SpaceBattle.Lib.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ООАиП\\SpaceBattle.Lib\\SpaceBattle.Lib.csproj",
+        "projectUniqueName": "C:\\Users\\Daniil\\Desktop\\ghjuf\\Spaceship\\SpaceBattle.Lib\\SpaceBattle.Lib.csproj",
         "projectName": "SpaceBattle.Lib",
-        "projectPath": "D:\\ООАиП\\SpaceBattle.Lib\\SpaceBattle.Lib.csproj",
-        "packagesPath": "C:\\Users\\Миханэйло\\.nuget\\packages\\",
-        "outputPath": "D:\\ООАиП\\SpaceBattle.Lib\\obj\\",
+        "projectPath": "C:\\Users\\Daniil\\Desktop\\ghjuf\\Spaceship\\SpaceBattle.Lib\\SpaceBattle.Lib.csproj",
+        "packagesPath": "C:\\Users\\Daniil\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Daniil\\Desktop\\ghjuf\\Spaceship\\SpaceBattle.Lib\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Миханэйло\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Daniil\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
