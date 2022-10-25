@@ -386,12 +386,5 @@ FodyWeavers.xsd
 *.msm
 *.msp
 
-# # JetBrains Rider
-# *.sln.iml
-
-.vscode
-SpaceBattle.Lib\bin
-SpaceBattle.Lib\obj
-SpaceBattle.Lib.Test\bin
-SpaceBattle.Lib.Test\TestResults
-SpaceBattle.Lib.Test\obj
+# JetBrains Rider
+*.sln.iml
