@@ -1,7 +1,8 @@
 name: dotnet package
  
 on:
-  workflow_dispatch:
+  push:
+    branches: [ "burinov"]
   pull_request:
     branches: [ "main" ]
  
