@@ -1,18 +1,14 @@
-// using Hwdtech;
-// using Hwdtech.IoC;
-// using Moq;
+using Hwdtech;
+using Hwdtech.Ioc;
+using Moq;
 
-// namespace SpaceBattle.Lib.Test;
+namespace SpaceBattle.Lib.Test;
 
-// public class StartMoveCommandTests
-// {
-    
-//     // [Fact]
-//     // //start moving - first element
-//     // //I have started moving
-//     // IoC.Resolve<ICommand>()
-//     // //Stop moving
-//     // IoC.Resolve<SukaStop>
-//     // //I have stopped moving
-//     // //ya hz
-// }
+public class StartMoveCommandTests
+{
+    public StartMoveCommandTests()
+    {
+        new InitScopeBasedIoCImplementationCommand().Execute();
+        IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
+    }
+}
