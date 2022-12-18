@@ -5,11 +5,11 @@ public class AngleTest
     public void AngleTestSum()
     {
         Angle a = new Angle(1, 9);
-        Angle b = new Angle(2, 9);
+        Angle b = new Angle(2, 3);
         Angle c = new Angle(5, 9);
-        Assert.Equal(new Angle(1, 3), a + b);
-        Assert.Equal(new Angle(7, 9), c + b);
-        Assert.Equal(new Angle(7, 9), b + c);
+        Assert.Equal(new Angle(7, 9), a + b);
+        Assert.Equal(new Angle(11, 9), c + b);
+        Assert.Equal(new Angle(11, 9), b + c);
     }
     [Fact]
     public void AngleTestEqual()
