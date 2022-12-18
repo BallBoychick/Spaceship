@@ -14,53 +14,32 @@ DA:22,1
 FN:23,SpaceBattle.Lib.Angle SpaceBattle.Lib.Angle::op_Addition(SpaceBattle.Lib.Angle,SpaceBattle.Lib.Angle)
 FNDA:5,SpaceBattle.Lib.Angle SpaceBattle.Lib.Angle::op_Addition(SpaceBattle.Lib.Angle,SpaceBattle.Lib.Angle)
 DA:24,5
-DA:25,20
+DA:25,5
 DA:26,5
-DA:27,5
 DA:28,5
-DA:29,5
-DA:30,5
-DA:31,5
-DA:32,5
-DA:34,0
-DA:35,0
-DA:36,0
-DA:37,0
-DA:38,0
-DA:39,0
-DA:42,0
-DA:43,0
-DA:44,0
-DA:45,0
-DA:46,0
-DA:49,5
-BRDA:26,29,0,5
-BRDA:26,29,1,0
-BRDA:34,121,0,0
-BRDA:34,121,1,0
-FN:50,System.Boolean SpaceBattle.Lib.Angle::op_Equality(SpaceBattle.Lib.Angle,SpaceBattle.Lib.Angle)
+FN:29,System.Boolean SpaceBattle.Lib.Angle::op_Equality(SpaceBattle.Lib.Angle,SpaceBattle.Lib.Angle)
 FNDA:2,System.Boolean SpaceBattle.Lib.Angle::op_Equality(SpaceBattle.Lib.Angle,SpaceBattle.Lib.Angle)
-DA:51,2
-DA:52,2
-DA:53,2
-FN:54,System.Boolean SpaceBattle.Lib.Angle::op_Inequality(SpaceBattle.Lib.Angle,SpaceBattle.Lib.Angle)
+DA:30,2
+DA:31,2
+DA:32,2
+FN:33,System.Boolean SpaceBattle.Lib.Angle::op_Inequality(SpaceBattle.Lib.Angle,SpaceBattle.Lib.Angle)
 FNDA:1,System.Boolean SpaceBattle.Lib.Angle::op_Inequality(SpaceBattle.Lib.Angle,SpaceBattle.Lib.Angle)
-DA:55,1
-DA:56,1
-DA:57,1
-FN:58,System.Boolean SpaceBattle.Lib.Angle::Equals(System.Object)
+DA:34,1
+DA:35,1
+DA:36,1
+FN:37,System.Boolean SpaceBattle.Lib.Angle::Equals(System.Object)
 FNDA:6,System.Boolean SpaceBattle.Lib.Angle::Equals(System.Object)
-DA:59,6
-DA:60,6
-DA:61,6
-DA:62,6
-BRDA:60,9,0,5
-BRDA:60,9,1,1
-FN:63,System.Int32 SpaceBattle.Lib.Angle::GetHashCode()
+DA:38,6
+DA:39,6
+DA:40,6
+DA:41,6
+BRDA:39,9,0,5
+BRDA:39,9,1,1
+FN:42,System.Int32 SpaceBattle.Lib.Angle::GetHashCode()
 FNDA:2,System.Int32 SpaceBattle.Lib.Angle::GetHashCode()
-DA:64,2
-DA:65,2
-DA:66,2
+DA:43,2
+DA:44,2
+DA:45,2
 FN:5,System.Void SpaceBattle.Lib.Angle::.ctor(System.Int32,System.Int32)
 FNDA:29,System.Void SpaceBattle.Lib.Angle::.ctor(System.Int32,System.Int32)
 DA:6,29
@@ -73,10 +52,10 @@ DA:12,1
 DA:14,28
 BRDA:10,33,0,1
 BRDA:10,33,1,28
-LF:48
-LH:37
-BRF:10
-BRH:7
+LF:31
+LH:31
+BRF:6
+BRH:6
 FNF:8
 FNH:8
 end_of_record
@@ -99,7 +78,7 @@ BRH:0
 FNF:1
 FNH:1
 end_of_record
-SF:D:\ООАиП\SpaceBattle.Lib\Move\MoveCommand.cs
+SF:D:\ООАиП\SpaceBattle.Lib\Move\Movecommand.cs
 FN:10,System.Void SpaceBattle.Lib.MoveCommand::execute()
 FNDA:4,System.Void SpaceBattle.Lib.MoveCommand::execute()
 DA:11,4

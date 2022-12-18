@@ -22,29 +22,8 @@ public class Angle
     }
     public static Angle operator +(Angle angle1, Angle angle2)
     {
-        int z = 0, xa = 0, xb = 0, gcd = 0;
-        if (angle2.dena % angle1.dena == 0)
-        {
-            z = angle2.dena;
-            xb = (angle2.numa * angle1.dena) / z;
-            xa = (angle1.numa * angle2.dena) / z;
-            gcd = GCD(xa + xb, z);
-            return new Angle((xa + xb) / gcd, z / gcd);
-        }
-        else if (angle1.dena % angle2.dena == 0)
-        {
-            z = angle1.numa;
-            xb = angle2.numa * (angle1.dena / angle2.dena);
-            xa = angle1.numa;
-            return new Angle((xb + xa) / z, z);
-        }
-        else
-        {
-            z = angle1.dena * angle2.dena;
-            xa = angle1.numa * angle2.dena;
-            xb = angle2.numa * angle1.dena;
-            return new Angle(xb + xa, z);
-        }
+        int y3 = GCD(angle1.numa * angle2.dena + angle2.numa * angle1.dena, angle1.dena * angle2.dena);
+        return new Angle((angle1.numa * angle2.dena + angle2.numa * angle1.dena) / y3, angle1.dena * angle2.dena / y3);
         
     }
     public static bool operator ==(Angle angle1, Angle angle2)
