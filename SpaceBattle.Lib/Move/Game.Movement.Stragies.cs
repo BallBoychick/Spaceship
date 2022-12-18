@@ -15,7 +15,7 @@ public class MovementStrategy : IStrategy
 
         ICommand repeat_сommand = IoC.Resolve<ICommand>("Game.Command.Repeat", inject_command);
         list_command.Append(repeat_сommand);
-        
+
         return inject_command;
         //повторяющуюся рипитнутую команду
         //StartMove
