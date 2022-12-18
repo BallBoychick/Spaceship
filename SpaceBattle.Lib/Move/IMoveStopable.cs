@@ -1,6 +1,6 @@
 namespace SpaceBattle.Lib;
 
-interface IMoveStopable
+public interface IMoveStopable
 {
     IEnumerable<string> Properties
     {

@@ -1,6 +1,6 @@
 namespace SpaceBattle.Lib;
 
-interface IMoveStartable
+public interface IMoveStartable
 {
     IUObject Target
     {
