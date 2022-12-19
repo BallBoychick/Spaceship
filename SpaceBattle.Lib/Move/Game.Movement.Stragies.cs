@@ -17,18 +17,6 @@ public class MovementStrategy : IStrategy
         list_command.Append(repeat_сommand);
 
         return inject_command;
-        //повторяющуюся рипитнутую команду
-        //StartMove
-        //Macro Command
-        //Injecting Command
-        //Repeat Command
-        //return vishe
-        //Why is it in lab2????
     }
 
 }
-//MovementStrategy.Strategy(params object[])" не может реализовать "IStrategy.Strategy(params object[])", потому что не
-//имеет соответствующего возвращаемого типа "object".
-
-//error CS0161: "MovementStrategy.Strategy(params object[])": не все пути к коду
-//возвращают значение. [D:\ООАиП\SpaceBattle.Lib\SpaceBattle.Lib.csproj]
