@@ -61,16 +61,16 @@ FNH:8
 end_of_record
 SF:D:\ООАиП\SpaceBattle.Lib\Move\Game.Movement.Stragies.cs
 FN:7,System.Object SpaceBattle.Lib.MovementStrategy::RunStrategy(System.Object[])
-FNDA:2,System.Object SpaceBattle.Lib.MovementStrategy::RunStrategy(System.Object[])
-DA:8,2
-DA:9,2
-DA:10,2
-DA:12,2
-DA:14,2
-DA:16,2
-DA:17,2
-DA:19,2
-DA:26,2
+FNDA:1,System.Object SpaceBattle.Lib.MovementStrategy::RunStrategy(System.Object[])
+DA:8,1
+DA:9,1
+DA:10,1
+DA:12,1
+DA:14,1
+DA:16,1
+DA:17,1
+DA:19,1
+DA:20,1
 LF:9
 LH:9
 BRF:0
