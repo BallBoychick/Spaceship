@@ -10,7 +10,7 @@ public class BuildSolutionTreeCommand : ICommand
         this.file = file;
     }
     public void execute()
-    { 
+    {
         var parametrs = File.ReadAllLines(file).ToList().Select(line => line.Split(" ").Select(int.Parse).ToList()).ToList();
 
         var tree = IoC.Resolve<IDictionary<int, object>>("Game.GetSolutionTree");
