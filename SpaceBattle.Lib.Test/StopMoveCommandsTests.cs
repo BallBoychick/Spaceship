@@ -15,7 +15,7 @@ public class StopMoveCommandTests
         mockCommand.Setup(x => x.execute());
 
         var mockInjecting = new Mock<IInjectable>();
-        mockInjecting.Setup(x => x.Injecting(It.IsAny<SpaceBattle.Lib.ICommand>()));
+        mockInjecting.Setup(x => x.Inject(It.IsAny<SpaceBattle.Lib.ICommand>()));
 
         var mockStrategyReturnIInjectable = new Mock<IStrategy>();
         mockStrategyReturnIInjectable.Setup(x => x.RunStrategy(It.IsAny<object[]>())).Returns(mockInjecting.Object);
@@ -70,16 +70,5 @@ public class StopMoveCommandTests
 
         ICommand stopMove = new StopMoveCommand(stopable.Object);
         Assert.Throws<Exception>(() => stopMove.execute());
-    }
-
-    [Fact]
-    public void SuccesOfSetupCommandStrategy()
-    {
-        var obj = new Mock<IUObject>();
-        obj.Setup(o => o.getProperty("Velocity")).Returns(new Vector(1, 1));
-
-        var strategy = new SetupCommandStrategy();
-
-        Assert.NotNull(strategy.RunStrategy(obj.Object, "Velocity"));
     }
 }
