@@ -27,7 +27,7 @@ public class StopMoveCommandTests
         mockStrategyReturnEmpty.Setup(x => x.RunStrategy()).Returns(mockCommand.Object);
 
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Commands.RemoveProperty", (object[] args) => mockStrategyReturnsCommand.Object.RunStrategy(args)).Execute();
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Commands.SetupCommand", (object[] args) => mockStrategyReturnIInjectable.Object.RunStrategy(args)).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Commands.SetProperty", (object[] args) => mockStrategyReturnIInjectable.Object.RunStrategy(args)).Execute();
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Commands.Empty", (object[] args) => mockStrategyReturnEmpty.Object.RunStrategy(args)).Execute();
     }
 
