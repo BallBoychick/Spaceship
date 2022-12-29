@@ -38,6 +38,8 @@ public class CheckCollisionCommandTests
         var mockStrategyReturnsCorrentList = new Mock<IStrategy>();
         mockStrategyReturnsCorrentList.Setup(x => x.RunStrategy(It.IsAny<object[]>())).Returns(new List<int>()).Verifiable();
 
+        var a = new TreeStrategy();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.TreeStrategy", (object[] args) => a.RunStrategy(args)).Execute();
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.GetSolutionTree", (object[] args) => mockStrategyReturnsTree.Object.RunStrategy(args)).Execute();
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Command.GetProperty", (object[] args) => mockStrategyReturnsList.Object.RunStrategy(args)).Execute();
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Collision", (object[] args) => mockStrategyReturnsCommand.Object.RunStrategy(args)).Execute();
@@ -50,6 +52,5 @@ public class CheckCollisionCommandTests
         mockStrategyReturnsCorrentList.VerifyAll();
         mockStrategyReturnsCommand.VerifyAll();
         mockStrategyReturnsList.VerifyAll();
-        mockStrategyReturnsTree.VerifyAll();
     }
 }

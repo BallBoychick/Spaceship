@@ -20,8 +20,6 @@ public class CheckCollisionCommand: ICommand
 
         var objects = IoC.Resolve<List<int>>("Game.TrainingDataToCollision", object1, object2);
 
-        objects.ForEach(num => tree = (IDictionary<int, object>) tree[num]);
-
-        if (tree.Keys.First() == 1) IoC.Resolve<ICommand>("Game.Collision", obj1, obj2).execute();
+        if (IoC.Resolve<bool>("Game.TreeStrategy", objects)) IoC.Resolve<ICommand>("Game.Collision", obj1, obj2).execute();
     }
 }
