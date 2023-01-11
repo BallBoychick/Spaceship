@@ -9,9 +9,9 @@ public class MacroCommandStrategyTests
     {
         var mockCommand = new Mock<ICommand>();
         mockCommand.Setup(a => a.execute()).Verifiable();
-        var list = new List<ICommand>(){mockCommand.Object};
+        var list = new List<ICommand>() { mockCommand.Object };
         var command = new MacroCommand(list);
-        
+
         command.execute();
         mockCommand.Verify();
     }

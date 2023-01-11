@@ -43,7 +43,7 @@ public class TestExceptionFindHandler
         Mock<System.Exception> mockException = new Mock<System.Exception>();
 
         IStrategy strategy = (IStrategy)new ExceptionFindHandlerStrategy().RunStrategy(mockCommand.Object, mockException.Object);
-        Assert.Equal(strategy.RunStrategy(), "it's strategy");
+        Assert.Equal("it's strategy", strategy.RunStrategy());
     }
     [Fact]
     public void ExceptionFindHandlerNoTFoundCommandTestPositive()
@@ -54,7 +54,7 @@ public class TestExceptionFindHandler
         IStrategy strategy = (IStrategy)new ExceptionFindHandlerStrategy().RunStrategy(emptyCommand, mockException.Object);
 
 
-        Assert.Equal(strategy.RunStrategy(), "it's not found command strategy");
+        Assert.Equal("it's not found command strategy", strategy.RunStrategy());
     }
     [Fact]
     public void ExceptionFindHandlerTestNegative()
@@ -65,7 +65,7 @@ public class TestExceptionFindHandler
         IStrategy strategy = (IStrategy)new ExceptionFindHandlerStrategy().RunStrategy(mockCommand.Object, exception);
 
 
-        Assert.Equal(strategy.RunStrategy(), "it's not found exception strategy");
+        Assert.Equal("it's not found exception strategy", strategy.RunStrategy());
     }
 
 }

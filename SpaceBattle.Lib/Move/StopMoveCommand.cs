@@ -10,7 +10,7 @@ public class StopMoveCommand : ICommand
     {
         this.stoppable = stoppable;
     }
-    
+
     public void execute()
     {
         stoppable.Properties.ToList().ForEach(a => IoC.Resolve<ICommand>("Game.Commands.RemoveProperty", stoppable.Target, a).execute());

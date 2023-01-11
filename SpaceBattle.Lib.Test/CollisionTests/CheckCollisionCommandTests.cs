@@ -27,7 +27,7 @@ public class CheckCollisionCommandTests
         mockStrategyReturnsCommand.Setup(x => x.RunStrategy(obj1.Object, obj2.Object)).Returns(mockCommand.Object).Verifiable();
 
         var mockDict = new Mock<IDictionary<int, object>>();
-        mockDict.Setup(x => x.Keys).Returns(new List<int>(){1});
+        mockDict.Setup(x => x.Keys).Returns(new List<int>() { 1 });
 
         var mockStrategyReturnsTree = new Mock<IStrategy>();
         mockStrategyReturnsTree.Setup(x => x.RunStrategy()).Returns(mockDict.Object).Verifiable();
