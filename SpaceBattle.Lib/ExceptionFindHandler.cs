@@ -28,5 +28,7 @@ public class ExceptionFindHandlerStrategy : IStrategy
             return IoC.Resolve<IStrategy>("Exception.Get.NotFoundExcepetionHandler");
         }
         return exceptionHandler;
+        
     }
+
 }
