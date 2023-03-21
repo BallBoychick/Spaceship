@@ -44,6 +44,21 @@ public class ServerThreadTests
     public void StartThreadSuccess()
     {
         InitState();
+        var mre = new ManualResetEvent(false);
+        var mockCommand = new Mock<Lib.ICommand>();
+        mockCommand.Setup(x => x.execute()).Callback(() => mre.Set()).Verifiable();
+        var startThreadCommand = IoC.Resolve<Lib.ICommand>("Create And Start Thread", "1");
+        startThreadCommand.execute();
+        new ChangeBehaviorThreadStrategy().RunStrategy("1", () => {});
+        new ChangeBehaviorThreadStrategy().RunStrategy("1");
+        IoC.Resolve<Lib.ICommand>("Send Command", "1", mockCommand.Object).execute();
 
+        var isDone = mre.WaitOne(10000);
+        var thread = IoC.Resolve<ServerThread>("Threads.1");
+        
+        var cmd = IoC.Resolve<Lib.ICommand>("Hard Stop Command", "1");
+        cmd.execute();
+        Assert.True(isDone);
+        mockCommand.Verify();
     }
 }
