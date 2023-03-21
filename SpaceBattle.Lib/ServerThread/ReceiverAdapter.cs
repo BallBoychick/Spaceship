@@ -1,0 +1,21 @@
+namespace SpaceBattle.Lib;
+using System;
+using System.Collections.Concurrent;
+using System.Linq;
+using System.Threading.Tasks;
+
+public class ReceiverAdapter : IReciever
+{
+    BlockingCollection<ICommand> queue;
+
+    public ReceiverAdapter(BlockingCollection<ICommand> queue) => this.queue = queue; 
+    public bool IsEmpty()
+    {
+        return queue.Count == 0;
+    }
+
+    public ICommand Recieve()
+    {
+        return queue.Take();
+    }
+}
