@@ -6,5 +6,6 @@ class Program
     static void Main(string[] args)
     {
         //вызываем из StartApp и execute()
+        Console.WriteLine("Start");
     }
 }
