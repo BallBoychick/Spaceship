@@ -11,11 +11,10 @@ public class HardStopThreadStrategy : IStrategy
        
         var thread = IoC.Resolve<ServerThread>("Threads."+ idThread);
         var stopThreadCommand = new StopThreadCommand(thread);
-        stopThreadCommand.ChangeBehaviorThreadTermination(() => {
-            stopThreadCommand.HandleCommand();
-            action();
-        });
+        var changeBehaviorStopThreadCommand = new ChangeBehaviorStopThreadCommand(() => {thread.StopThread();
+            action();},stopThreadCommand);
         
+        changeBehaviorStopThreadCommand.execute();
         IoC.Resolve<Lib.ICommand>("Send Command", idThread, stopThreadCommand).execute();
         return true;
     }

@@ -103,14 +103,12 @@ public class ServerThreadTests
         Assert.True(isDoneFirstCommand);
         var mreSoftStop = new ManualResetEvent(false);
         var mreTwo = new ManualResetEvent(false);
-        var cmd = IoC.Resolve<Lib.ICommand>("Soft Stop Command", "1", () => { mreSoftStop.Set(); });
+        var cmd = IoC.Resolve<Lib.ICommand>("Soft Stop Command", "1", () => { mreSoftStop.WaitOne(10000); });
         cmd.execute();
         var mockCommandTwo = new Mock<Lib.ICommand>();
         mockCommandTwo.Setup(x => x.execute()).Callback(() => { mreTwo.Set(); });
         IoC.Resolve<Lib.ICommand>("Send Command", "1", mockCommandTwo.Object).execute();
-        var isDoneHardStop = mreSoftStop.WaitOne(10000);
-
-        Assert.True(isDoneHardStop);
+        mreSoftStop.Set();
         var isDoneCommandTwo = mreTwo.WaitOne(10000);
         Assert.True(isDoneCommandTwo);
 

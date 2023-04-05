@@ -4,10 +4,10 @@ public class StopThreadCommand: ICommand
 {
     private ServerThread thread;
 
-    private Action strategy;
-    public StopThreadCommand(ServerThread thread) 
+    internal Action strategy;
+    public StopThreadCommand(ServerThread thread, Action? strategy = null) 
     {
-        strategy = () => {    HandleCommand();};
+        this.strategy = strategy ?? (() => { thread.StopThread();});
         this.thread = thread;
         
     }
@@ -23,13 +23,5 @@ public class StopThreadCommand: ICommand
         }
 
     }
-    internal void HandleCommand()
-    {
-        thread.StopThread();
-    }
-
-    internal void ChangeBehaviorThreadTermination(Action action )
-    {
-        this.strategy = action;
-    }
+    
 }
