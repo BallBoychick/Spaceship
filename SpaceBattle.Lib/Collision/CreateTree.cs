@@ -9,7 +9,7 @@ public class BuildSolutionTreeCommand : ICommand
     {
         this.file = file;
     }
-    public void execute()
+    public void Execute()
     {
         var parametrs = File.ReadAllLines(file).ToList().Select(line => line.Split(" ").Select(int.Parse).ToList()).ToList();
 

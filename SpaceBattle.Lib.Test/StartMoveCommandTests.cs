@@ -12,7 +12,7 @@ public class StartMoveCommandTests
         IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
         
         var mockCommand = new Mock<SpaceBattle.Lib.ICommand>();
-        mockCommand.Setup(x => x.execute());
+        mockCommand.Setup(x => x.Execute());
 
         var mockStrategyReturnsCommand = new Mock<IStrategy>();
         mockStrategyReturnsCommand.Setup(x => x.RunStrategy(It.IsAny<object[]>())).Returns(mockCommand.Object);
@@ -37,7 +37,7 @@ public class StartMoveCommandTests
 
         ICommand startMove = new StartMoveCommand(startable.Object);
 
-        startMove.execute();
+        startMove.Execute();
         startable.Verify();
     }
 
@@ -51,7 +51,7 @@ public class StartMoveCommandTests
 
         ICommand startMove = new StartMoveCommand(startable.Object);
 
-        Assert.Throws<Exception>(() => startMove.execute());
+        Assert.Throws<Exception>(() => startMove.Execute());
     }
 
     [Fact]
@@ -65,6 +65,6 @@ public class StartMoveCommandTests
 
         ICommand startMove = new StartMoveCommand(startable.Object);
 
-        Assert.Throws<Exception>(() => startMove.execute());
+        Assert.Throws<Exception>(() => startMove.Execute());
     }
 }

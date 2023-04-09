@@ -9,12 +9,12 @@ public class StartServer : ICommand
         this.length = length;
     }
 
-    public void execute()
+    public void Execute()
     {
         var numbers = new int[] {length};
         foreach (int len in numbers)
         {
-            IoC.Resolve<ICommand>("CreateAndStartThreadStrategy", len).execute();
+            IoC.Resolve<ICommand>("CreateAndStartThreadStrategy", len).Execute();
         }
         Console.WriteLine("Start" + length + " threads");
     }

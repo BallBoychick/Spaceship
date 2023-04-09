@@ -21,7 +21,7 @@ public class CheckCollisionCommandTests
         var obj2 = new Mock<IUObject>();
 
         var mockCommand = new Mock<SpaceBattle.Lib.ICommand>();
-        mockCommand.Setup(x => x.execute());
+        mockCommand.Setup(x => x.Execute());
 
         var mockStrategyReturnsCommand = new Mock<IStrategy>();
         mockStrategyReturnsCommand.Setup(x => x.RunStrategy(obj1.Object, obj2.Object)).Returns(mockCommand.Object).Verifiable();
@@ -47,7 +47,7 @@ public class CheckCollisionCommandTests
 
         ICommand CheckCollision = new CheckCollisionCommand(obj1.Object, obj2.Object);
 
-        CheckCollision.execute();
+        CheckCollision.Execute();
 
         mockStrategyReturnsCorrentList.VerifyAll();
         mockStrategyReturnsCommand.VerifyAll();

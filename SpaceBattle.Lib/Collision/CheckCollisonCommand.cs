@@ -11,7 +11,7 @@ public class CheckCollisionCommand: ICommand
         this.obj2 = obj2;
     }
 
-    public void execute()
+    public void Execute()
     {
         var tree = IoC.Resolve<IDictionary<int, object>>("Game.GetSolutionTree");
 
@@ -20,6 +20,6 @@ public class CheckCollisionCommand: ICommand
 
         var objects = IoC.Resolve<List<int>>("Game.TrainingDataToCollision", object1, object2);
 
-        if (IoC.Resolve<bool>("Game.TreeStrategy", objects)) IoC.Resolve<ICommand>("Game.Collision", obj1, obj2).execute();
+        if (IoC.Resolve<bool>("Game.TreeStrategy", objects)) IoC.Resolve<ICommand>("Game.Collision", obj1, obj2).Execute();
     }
 }

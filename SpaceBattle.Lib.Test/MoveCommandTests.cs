@@ -10,7 +10,7 @@ public class MoveCommandTest
         movableMock.SetupGet(i => i.Velocity).Returns(new Vector(-7, 3));
         ICommand movecommand = new MoveCommand(movableMock.Object);
         // Act
-        movecommand.execute();
+        movecommand.Execute();
         // Assert
         Assert.Equal(new Vector(5, 8), movableMock.Object.Position);
     }
@@ -24,7 +24,7 @@ public class MoveCommandTest
         movableMock.SetupGet<Vector>(i => i.Velocity).Throws<ArgumentException>();
         ICommand movecommand = new MoveCommand(movableMock.Object);
         //Assert
-        Assert.Throws<ArgumentException>(() => movecommand.execute());
+        Assert.Throws<ArgumentException>(() => movecommand.Execute());
     }
 
     [Fact]
@@ -36,7 +36,7 @@ public class MoveCommandTest
         movableMock.SetupGet<Vector>(i => i.Velocity).Throws<Exception>();
         ICommand movecommand = new MoveCommand(movableMock.Object);
         // Assert
-        Assert.Throws<Exception>(() => movecommand.execute());
+        Assert.Throws<Exception>(() => movecommand.Execute());
     }
 
     [Fact]
@@ -49,6 +49,6 @@ public class MoveCommandTest
         movableMock.SetupGet<Vector>(i => i.Velocity).Returns(new Vector(-7, 3));
         ICommand movecommand = new MoveCommand(movableMock.Object);
         // Assert
-        Assert.Throws<ArgumentException>(() => movecommand.execute());
+        Assert.Throws<ArgumentException>(() => movecommand.Execute());
     }
 }

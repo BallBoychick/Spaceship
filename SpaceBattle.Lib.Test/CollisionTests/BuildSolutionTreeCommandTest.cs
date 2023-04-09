@@ -26,7 +26,7 @@ public class SolutionTreeTests
 
         var buildCommand = new BuildSolutionTreeCommand(path);
 
-        buildCommand.execute();
+        buildCommand.Execute();
 
         var tree = IoC.Resolve<IDictionary<int, object>>("Game.GetSolutionTree");
 
