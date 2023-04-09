@@ -1,10 +1,9 @@
 namespace SpaceBattle.Lib;
 using Hwdtech;
 
-class StartApp
+public class StartApp
 {
-    //public что-то
-    public int numberthread;
+    private int numberthread;
 
     public StartApp(int numberthread)
     {
@@ -12,9 +11,16 @@ class StartApp
     }
     public void Execute()
     {
-        //writeline
-        //нажмите для запуска потока
-        //нажмите для остановки потока
-        //мб можно стратегию замутить
+        Console.WriteLine("Нажмите на клавишу для старта....");
+        Console.Read();
+
+        IoC.Resolve<ICommand>("StartServerStrategy", numberthread).Execute();
+
+        Console.WriteLine("Нажмите на клавишу для остановки...");
+        Console.Read();
+
+        IoC.Resolve<ICommand>("StopServerStrategy").Execute();
+        Console.WriteLine("Все потоки застоплены и сервер тоже");
+        //мб можно стратегию замутить, но **** ааааа
     }
 }
