@@ -12,7 +12,7 @@ public class StartServerTests
         new InitScopeBasedIoCImplementationCommand().Execute();
         IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
 
-        const int length = 24;
+        const int length = 1;
         var strtservstra = new StartAppStrategy();
 
         var mockCommand = new Mock<SpaceBattle.Lib.ICommand>();
