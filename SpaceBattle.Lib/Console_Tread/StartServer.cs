@@ -11,11 +11,15 @@ public class StartServer : ICommand
 
     public void Execute()
     {
-        var numbers = new int[] {length};
-        foreach (int len in numbers)
+        // var numbers = new int[] {length};
+        // foreach (int len in numbers)
+        // {
+        //     IoC.Resolve<ICommand>("CreateAndStartThreadStrategy", len).Execute();
+        // }
+        // Console.WriteLine("Start" + length + " threads");
+        for (int i = 0; i < length; i++)
         {
-            IoC.Resolve<ICommand>("CreateAndStartThreadStrategy", len).Execute();
+            IoC.Resolve<ICommand>("CreateAndStartThreadStrategy", i).Execute();
         }
-        Console.WriteLine("Start" + length + " threads");
     }
 }

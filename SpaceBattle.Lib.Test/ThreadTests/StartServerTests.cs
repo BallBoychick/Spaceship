@@ -22,10 +22,10 @@ public class StartServerTests
         var mockStrategyWithParams = new Mock<IStrategy>();
         mockStrategyWithParams.Setup(x => x.RunStrategy(It.IsAny<object[]>())).Returns(mockCommand.Object).Verifiable();
 
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "StartServerStrategy", (object[] args) => strtservstra.RunStrategy(args)).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "StartAppStrategy", (object[] args) => strtservstra.RunStrategy(args)).Execute();
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "CreateAndStartThreadStrategy", (object[] args) => mockStrategyWithParams.Object.RunStrategy(args)).Execute();
 
-        IoC.Resolve<ICommand>("StartServerStrategy", length).Execute();
+        IoC.Resolve<ICommand>("StartAppStrategy", length).Execute();
 
         Assert.Equal(length, i);
     }

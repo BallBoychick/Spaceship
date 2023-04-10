@@ -14,7 +14,7 @@ public class StartApp
         Console.WriteLine("Нажмите на клавишу для старта....");
         Console.Read();
 
-        IoC.Resolve<ICommand>("StartServerStrategy", numberthread).Execute();
+        IoC.Resolve<ICommand>("StartAppStrategy", numberthread).Execute();
 
         Console.WriteLine("Нажмите на клавишу для остановки...");
         Console.Read();
