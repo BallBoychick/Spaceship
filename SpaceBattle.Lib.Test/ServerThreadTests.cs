@@ -16,7 +16,7 @@ public class ServerThreadTests
     {
         new InitScopeBasedIoCImplementationCommand().Execute();
         IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
-        
+
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Create And Start Thread", (object[] param) => new CreateStartServerThreadStrategy().RunStrategy(param)).Execute();
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Send Command", (object[] param) =>
         {
@@ -49,13 +49,13 @@ public class ServerThreadTests
         mockCommand.Setup(x => x.execute()).Callback(() => mre.Set()).Verifiable();
         var startThreadCommand = IoC.Resolve<Lib.ICommand>("Create And Start Thread", "1");
         startThreadCommand.execute();
-        new ChangeBehaviorThreadStrategy().RunStrategy("1", () => {});
+        new ChangeBehaviorThreadStrategy().RunStrategy("1", () => { });
         new ChangeBehaviorThreadStrategy().RunStrategy("1");
         IoC.Resolve<Lib.ICommand>("Send Command", "1", mockCommand.Object).execute();
 
         var isDone = mre.WaitOne(10000);
         var thread = IoC.Resolve<ServerThread>("Threads.1");
-        
+
         var cmd = IoC.Resolve<Lib.ICommand>("Hard Stop Command", "1");
         cmd.execute();
         Assert.True(isDone);
@@ -95,7 +95,7 @@ public class ServerThreadTests
         var mreOne = new ManualResetEvent(false);
         var mockCommandOne = new Mock<Lib.ICommand>();
         mockCommandOne.Setup(x => x.execute()).Callback(() => mreOne.Set()).Verifiable();
-        var startThreadCommand = IoC.Resolve<Lib.ICommand>("Create And Start Thread", "1", () => {});
+        var startThreadCommand = IoC.Resolve<Lib.ICommand>("Create And Start Thread", "1", () => { });
         startThreadCommand.execute();
         IoC.Resolve<Lib.ICommand>("Send Command", "1", mockCommandOne.Object).execute();
 
@@ -126,7 +126,7 @@ public class ServerThreadTests
 
     public void ThreadStopAnoutherThread()
     {
-        
+
         InitState();
         var startFirstThreadCommand = IoC.Resolve<Lib.ICommand>("Create And Start Thread", "1");
         startFirstThreadCommand.execute();
@@ -153,7 +153,7 @@ public class ServerThreadTests
         {
             return exceptionHandlerDict;
         }).Execute();
-        
+
         IoC.Resolve<Lib.ICommand>("Send Command", "1", mockRegisterExceptionHandler.Object).execute();
         MRE.WaitOne(10000);
         var startSecondThreadCommand = IoC.Resolve<Lib.ICommand>("Create And Start Thread", "2");
@@ -177,7 +177,7 @@ public class ServerThreadTests
         Assert.True(wasException);
 
         IoC.Resolve<Lib.ICommand>("Hard Stop Command", "1").execute();
-        
+
         IoC.Resolve<Lib.ICommand>("Soft Stop Command", "2").execute();
     }
 }

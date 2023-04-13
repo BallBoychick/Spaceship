@@ -1,15 +1,15 @@
 namespace SpaceBattle.Lib;
 
-public class StopThreadCommand: ICommand
+public class StopThreadCommand : ICommand
 {
     private ServerThread thread;
 
     internal Action strategy;
-    public StopThreadCommand(ServerThread thread, Action? strategy = null) 
+    public StopThreadCommand(ServerThread thread, Action? strategy = null)
     {
-        this.strategy = strategy ?? (() => { thread.StopThread();});
+        this.strategy = strategy ?? (() => { thread.StopThread(); });
         this.thread = thread;
-        
+
     }
     public void execute()
     {
@@ -23,5 +23,5 @@ public class StopThreadCommand: ICommand
         }
 
     }
-    
+
 }

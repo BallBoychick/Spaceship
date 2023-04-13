@@ -8,8 +8,8 @@ public class ChangeBehaviorThreadStrategy : IStrategy
     {
         String idThread = (string)parameters[0];
         Action action = (parameters.Count() == 2) ? (Action)parameters[1] : () => { };
-        
-        var thread = IoC.Resolve<ServerThread>("Threads."+ idThread);
+
+        var thread = IoC.Resolve<ServerThread>("Threads." + idThread);
         Action newAction = () =>
         {
             thread.HandleCommand();

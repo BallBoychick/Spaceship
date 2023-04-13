@@ -9,7 +9,7 @@ public class CreateStartServerThreadStrategy : IStrategy
     {
         String idThread = (string)parameters[0];
         Action action = (parameters.Count() == 2) ? (Action)parameters[1] : () => { };
-       
+
         var blockingCollection = new BlockingCollection<Lib.ICommand>();
         var reciever = new ReceiverAdapter(blockingCollection);
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Thread.Queue." + idThread, (object[] param) => blockingCollection).Execute();
