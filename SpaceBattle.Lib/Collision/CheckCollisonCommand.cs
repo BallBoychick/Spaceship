@@ -2,7 +2,7 @@ using Hwdtech;
 
 namespace SpaceBattle.Lib;
 
-public class CheckCollisionCommand: ICommand
+public class CheckCollisionCommand : ICommand
 {
     private IUObject obj1, obj2;
     public CheckCollisionCommand(IUObject obj1, IUObject obj2)

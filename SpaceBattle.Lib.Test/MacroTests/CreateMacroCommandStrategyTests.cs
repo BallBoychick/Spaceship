@@ -29,7 +29,7 @@ public class CreateMacroStrategyTests
         var mockIEnumerablestring = new Mock<IEnumerable<string>>();
 
         var mockStrategyIEnumerablestring = new Mock<IStrategy>();
-        
+
         mockStrategyIEnumerablestring.Setup(a => a.RunStrategy()).Returns(mockIEnumerablestring.Object).Verifiable();
 
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "SetupStringOperation.Name", (object[] args) => mockStrategyIEnumerablestring.Object.RunStrategy(args)).Execute();

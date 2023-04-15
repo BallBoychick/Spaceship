@@ -14,7 +14,7 @@ public class Angle
     }
     public static int GCD(int x, int y)
     {
-    return y == 0 ? x : GCD(y, x % y);
+        return y == 0 ? x : GCD(y, x % y);
     }
     public override string ToString()
     {
@@ -24,7 +24,7 @@ public class Angle
     {
         int y3 = GCD(angle1.numa * angle2.dena + angle2.numa * angle1.dena, angle1.dena * angle2.dena);
         return new Angle((angle1.numa * angle2.dena + angle2.numa * angle1.dena) / y3, angle1.dena * angle2.dena / y3);
-        
+
     }
     public static bool operator ==(Angle angle1, Angle angle2)
     {

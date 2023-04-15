@@ -18,10 +18,10 @@ public class BuildSolutionTreeCommand : ICommand
         parametrs.ForEach(list =>
         {
             var temp = tree;
-            list.ForEach(num => 
+            list.ForEach(num =>
             {
-                temp.TryAdd(num, new Dictionary<int, object>()); 
-                temp = (Dictionary<int, object>) temp[num];
+                temp.TryAdd(num, new Dictionary<int, object>());
+                temp = (Dictionary<int, object>)temp[num];
             });
         });
     }
