@@ -16,7 +16,6 @@ public class HandlerWriterTests
         var path = "../../../Errors.txt";
         var cmd = new HandlerWriterCommand(path, "Error3");
         cmd.Execute();
-        var sr = new StreamReader(path);
 
         var str = File.ReadLines(path).ToList().Last();
 
