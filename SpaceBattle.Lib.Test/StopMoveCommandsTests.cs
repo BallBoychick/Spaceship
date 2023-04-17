@@ -12,7 +12,7 @@ public class StopMoveCommandTests
         IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
 
         var mockCommand = new Mock<SpaceBattle.Lib.ICommand>();
-        mockCommand.Setup(x => x.execute());
+        mockCommand.Setup(x => x.Execute());
 
         var mockInjecting = new Mock<IInjectable>();
         mockInjecting.Setup(x => x.Inject(It.IsAny<SpaceBattle.Lib.ICommand>()));
@@ -41,7 +41,7 @@ public class StopMoveCommandTests
 
         ICommand stopMove = new StopMoveCommand(stopable.Object);
 
-        stopMove.execute();
+        stopMove.Execute();
 
         stopable.Verify();
     }
@@ -56,7 +56,7 @@ public class StopMoveCommandTests
 
         ICommand stopMove = new StopMoveCommand(stopable.Object);
 
-        Assert.Throws<Exception>(() => stopMove.execute());
+        Assert.Throws<Exception>(() => stopMove.Execute());
     }
 
     [Fact]
@@ -69,6 +69,6 @@ public class StopMoveCommandTests
         stopable.SetupGet(a => a.Properties).Throws<Exception>().Verifiable();
 
         ICommand stopMove = new StopMoveCommand(stopable.Object);
-        Assert.Throws<Exception>(() => stopMove.execute());
+        Assert.Throws<Exception>(() => stopMove.Execute());
     }
 }

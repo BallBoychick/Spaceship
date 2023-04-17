@@ -8,7 +8,7 @@ public class RotateCommandTest
         movable.SetupProperty(i => i.Angle, new Angle(45, 1));
         movable.SetupGet<Angle>(i => i.AngleVelocity).Returns(new Angle(90, 1));
         RotateCommand command = new RotateCommand(movable.Object);
-        command.execute();
+        command.Execute();
         Assert.Equal(new Angle(135, 1), movable.Object.Angle);
     }
     [Fact]
@@ -18,7 +18,7 @@ public class RotateCommandTest
         movable.SetupProperty(i => i.Angle, new Angle(45, 1));
         movable.SetupGet<Angle>(i => i.AngleVelocity).Throws<ArgumentException>();
         RotateCommand command = new RotateCommand(movable.Object);
-        Assert.Throws<ArgumentException>(() => command.execute());
+        Assert.Throws<ArgumentException>(() => command.Execute());
     }
     [Fact]
     public void RotateCommandTestGetAngleExeption()
@@ -28,7 +28,7 @@ public class RotateCommandTest
         movable.SetupGet<Angle>(i => i.Angle).Throws<ArgumentException>();
         movable.SetupGet<Angle>(i => i.AngleVelocity).Returns(new Angle(90, 1));
         RotateCommand command = new RotateCommand(movable.Object);
-        Assert.Throws<ArgumentException>(() => command.execute());
+        Assert.Throws<ArgumentException>(() => command.Execute());
     }
     [Fact]
     public void RotateCommandTestSetPositionExeption()
@@ -38,6 +38,6 @@ public class RotateCommandTest
         movable.SetupSet(i => i.Angle = It.IsAny<Angle>()).Throws<ArgumentException>();
         movable.SetupGet<Angle>(i => i.AngleVelocity).Returns(new Angle(90, 1));
         RotateCommand command = new RotateCommand(movable.Object);
-        Assert.Throws<ArgumentException>(() => command.execute());
+        Assert.Throws<ArgumentException>(() => command.Execute());
     }
 }

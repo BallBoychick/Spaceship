@@ -9,7 +9,7 @@ public class BuildSolutionTreeCommand : ICommand
     {
         this.file = file;
     }
-    public void execute()
+    public void Execute()
     {
         var parametrs = File.ReadAllLines(file).ToList().Select(line => line.Split(" ").Select(int.Parse).ToList()).ToList();
 
@@ -18,10 +18,10 @@ public class BuildSolutionTreeCommand : ICommand
         parametrs.ForEach(list =>
         {
             var temp = tree;
-            list.ForEach(num => 
+            list.ForEach(num =>
             {
-                temp.TryAdd(num, new Dictionary<int, object>()); 
-                temp = (Dictionary<int, object>) temp[num];
+                temp.TryAdd(num, new Dictionary<int, object>());
+                temp = (Dictionary<int, object>)temp[num];
             });
         });
     }

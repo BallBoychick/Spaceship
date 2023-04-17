@@ -7,7 +7,7 @@ namespace SpaceBattle.Lib.Test;
 
 public class SolutionTreeTests
 {
-    
+
     public SolutionTreeTests()
     {
         new InitScopeBasedIoCImplementationCommand().Execute();
@@ -26,7 +26,7 @@ public class SolutionTreeTests
 
         var buildCommand = new BuildSolutionTreeCommand(path);
 
-        buildCommand.execute();
+        buildCommand.Execute();
 
         var tree = IoC.Resolve<IDictionary<int, object>>("Game.GetSolutionTree");
 
@@ -39,5 +39,5 @@ public class SolutionTreeTests
         Assert.True(((IDictionary<int, object>)tree[1]).ContainsKey(2));
 
         Assert.False(((IDictionary<int, object>)((IDictionary<int, object>)tree[1])[2]).ContainsKey(9));
-    }  
+    }
 }

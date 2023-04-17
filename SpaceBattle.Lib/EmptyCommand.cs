@@ -2,6 +2,6 @@ namespace SpaceBattle.Lib;
 
 public class EmptyCommand : ICommand
 {
-    public void execute() { }
-    
+    public void Execute() { }
+
 }
