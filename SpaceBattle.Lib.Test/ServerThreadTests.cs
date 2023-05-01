@@ -49,8 +49,6 @@ public class ServerThreadTests
         mockCommand.Setup(x => x.execute()).Callback(() => mre.Set()).Verifiable();
         var startThreadCommand = IoC.Resolve<Lib.ICommand>("Create And Start Thread", "1");
         startThreadCommand.execute();
-        new ChangeBehaviorThreadStrategy().RunStrategy("1", () => { });
-        new ChangeBehaviorThreadStrategy().RunStrategy("1");
         IoC.Resolve<Lib.ICommand>("Send Command", "1", mockCommand.Object).execute();
 
         var isDone = mre.WaitOne(10000);
