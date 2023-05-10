@@ -11,7 +11,7 @@ public class StopThreadCommand : ICommand
         this.thread = thread;
 
     }
-    public void execute()
+    public void Execute()
     {
         if (Thread.CurrentThread == thread.thread)
         {

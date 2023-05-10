@@ -18,17 +18,17 @@ public class SoftStopThreadStrategy : IStrategy
             IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Thread.Queue." + idThread, (object[] param) => queue);
             while (!thread.queue.IsEmpty())
             {
-                thread.queue.Recieve().execute();
+                thread.queue.Recieve().Execute();
             }
             thread.StopThread();
 
             action();
         }, stopThreadCommand);
 
-        changeBehaviorStopThreadCommand.execute();
+        changeBehaviorStopThreadCommand.Execute();
 
 
-        IoC.Resolve<Lib.ICommand>("Send Command", idThread, stopThreadCommand).execute();
+        IoC.Resolve<Lib.ICommand>("Send Command", idThread, stopThreadCommand).Execute();
         return true;
     }
 }

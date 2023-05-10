@@ -17,8 +17,8 @@ public class HardStopThreadStrategy : IStrategy
             action();
         }, stopThreadCommand);
 
-        changeBehaviorStopThreadCommand.execute();
-        IoC.Resolve<Lib.ICommand>("Send Command", idThread, stopThreadCommand).execute();
+        changeBehaviorStopThreadCommand.Execute();
+        IoC.Resolve<Lib.ICommand>("Send Command", idThread, stopThreadCommand).Execute();
         return true;
     }
 }

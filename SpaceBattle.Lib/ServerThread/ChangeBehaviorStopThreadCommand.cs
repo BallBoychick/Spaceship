@@ -10,7 +10,7 @@ class ChangeBehaviorStopThreadCommand : ICommand
         this.strategy = strategy;
         this.stopThreadCommand = command;
     }
-    public void execute()
+    public void Execute()
     {
         stopThreadCommand.strategy = strategy;
     }

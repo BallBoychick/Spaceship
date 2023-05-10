@@ -10,7 +10,7 @@ public class StartThreadCommand : ICommand
         this.thread = thread;
         this.action = action;
     }
-    public void execute()
+    public void Execute()
     {
         thread.StartThread();
         action();

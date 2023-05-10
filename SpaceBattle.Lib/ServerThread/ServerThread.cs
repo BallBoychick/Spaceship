@@ -26,7 +26,7 @@ public class ServerThread
                 }
                 catch (Exception e)
                 {
-                    IoC.Resolve<ICommand>("Exception Handler.Add", e).execute();
+                    IoC.Resolve<ICommand>("Exception Handler.Add", e).Execute();
 
 
                 }
@@ -56,6 +56,6 @@ public class ServerThread
     internal void HandleCommand()
     {
         ICommand command = queue.Recieve();
-        command.execute();
+        command.Execute();
     }
 }
