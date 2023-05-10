@@ -6,18 +6,19 @@ public class ServerThread
     internal IReciever queue;
 
     private Action strategy;
+    private object scope;
     internal Thread thread;
-    public ServerThread(IReciever reciever)
+    public ServerThread(IReciever reciever, object scope)
     {
         queue = reciever;
-
+        this.scope = scope;
         strategy = () =>
         {
             HandleCommand();
         };
         thread = new Thread(() =>
         {
-            IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
+            IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", scope).Execute();
             while (!stop)
             {
                 try
