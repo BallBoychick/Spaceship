@@ -28,5 +28,4 @@ jobs:
       - name: Codecov
         uses: codecov/codecov-action@v3
         with:
-          token: ${{ secrets.MY_SECRET_BURI }} 
           files: SpaceBattle.Lib.Test/coverage/coverage.opencover.xml

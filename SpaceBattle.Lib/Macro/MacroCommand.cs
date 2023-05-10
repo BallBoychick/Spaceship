@@ -8,8 +8,8 @@ public class MacroCommand : ICommand
     {
         this.cmd_list = cmd_list;
     }
-    public void execute()
+    public void Execute()
     {
-        cmd_list.ToList().ForEach(cmd=> cmd.execute());
+        cmd_list.ToList().ForEach(cmd => cmd.Execute());
     }
 }

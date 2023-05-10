@@ -7,7 +7,7 @@ public class MoveCommand : ICommand
     {
         moving = obj;
     }
-    public void execute()
+    public void Execute()
     {
         moving.Position += moving.Velocity;
     }

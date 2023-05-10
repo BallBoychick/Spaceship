@@ -7,7 +7,7 @@ public class RotateCommand : ICommand
     {
         rotating = obj;
     }
-    public void execute()
+    public void Execute()
     {
         rotating.Angle += rotating.AngleVelocity;
     }
