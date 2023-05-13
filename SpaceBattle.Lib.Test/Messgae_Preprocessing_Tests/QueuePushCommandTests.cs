@@ -48,19 +48,16 @@ public class QueuePushCommandTests
 
         gameQueuePushCommand.Execute();
 
-        queueMock.Verify(q => q.Enqueue(commandMock.Object));
+        mock_strategy.VerifyAll();
     }
     [Fact]
 
     public void GameQueuePushCommand_CanBeConstructed()
     {
-        // Arrange
         var commandMock = new Mock<ICommand>();
 
-        // Act
         var gameQueuePushCommand = new GameQueuePushCommand(1, commandMock.Object);
 
-        // Assert
         Assert.NotNull(gameQueuePushCommand);
     }
 }
