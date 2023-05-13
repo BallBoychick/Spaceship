@@ -43,7 +43,7 @@ public class ServerThread
         thread.Start();
     }
 
-    public void StopThread()
+    internal void StopThread()
     {
         stop = true;
 
