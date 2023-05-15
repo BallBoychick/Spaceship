@@ -28,10 +28,7 @@ public class ServerThread
                 catch (Exception e)
                 {
                     IoC.Resolve<ICommand>("Exception Handler.Add", e).Execute();
-
-
                 }
-
             }
         }
          );

@@ -19,7 +19,8 @@ public class CreateStartServerThreadStrategy : IStrategy
         {
             return thread;
         }).Execute();
-        var startThreadCommand = new StartThreadCommand(thread, action);
+        IoC.Resolve<Hwdtech.ICommand>("SendCommand", (object[] param) => blockingCollection).Execute();
+        var startThreadCommand = new StartThreadCommand(thread);
         return startThreadCommand;
 
     }
