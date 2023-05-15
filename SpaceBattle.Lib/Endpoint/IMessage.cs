@@ -1,3 +1,4 @@
+namespace SpaceBattle.Lib;
 public interface IMessage
 {
     public string Type { get; }
