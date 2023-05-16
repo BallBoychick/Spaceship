@@ -17,6 +17,5 @@ public class GameQueuePushStrategyTests
         var cmd = strategy.RunStrategy(id, commd);
 
         Assert.NotNull(cmd);
-
     }
 }

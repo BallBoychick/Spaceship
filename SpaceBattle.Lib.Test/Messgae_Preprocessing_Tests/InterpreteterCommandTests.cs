@@ -38,7 +38,6 @@ public class InterpreterCommandTests
         var interpreterCommand = new InterpreterCommand(message.Object);
 
         Assert.Throws<Exception>(() => interpreterCommand.Execute());
-        // queue.Verify(q => q.Push(It.IsAny<string>(), gameCommandMock.Object));
             
 
 
@@ -55,18 +54,16 @@ public class InterpreterCommandTests
 
         var commandMock = new Mock<ICommand>();
         commandMock.Setup(x => x.Execute());
-        // var mockStrategyReturnsCommand = new Mock<IStrategy>();
-        // mockStrategyReturnsCommand.Setup(x => x.RunStrategy(It.IsAny<IMessage>())).Returns(mockCommand.Object);
         var queue = new Queue<ICommand>();
 
         var queuepushCommand = new Mock<ICommand>();
         queuepushCommand.Setup(c => c.Execute()).Callback(() => { queue.Enqueue(commandMock.Object); });
 
         var queuePushStrategy = new Mock<IStrategy>();
-        queuePushStrategy.Setup(s => s.RunStrategy(It.IsAny<int>(), It.IsAny<ICommand>())).Returns(queuepushCommand.Object).Verifiable();
+        queuePushStrategy.Setup(s => s.RunStrategy(It.IsAny<int>(), It.IsAny<ICommand>())).Returns(queuepushCommand.Object);
 
         var mockStrategyReturnsCommand = new Mock<IStrategy>();
-        mockStrategyReturnsCommand.Setup(x => x.RunStrategy(It.IsAny<IMessage>())).Returns(commandMock.Object);
+        mockStrategyReturnsCommand.Setup(x => x.RunStrategy(It.IsAny<IMessage>())).Returns(commandMock.Object).Verifiable();
 
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.CreateCommand", (object[] args) => mockStrategyReturnsCommand.Object.RunStrategy(args)).Execute();
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Queue.Push", (object[] args) => queuePushStrategy.Object.RunStrategy(args)).Execute();
@@ -76,7 +73,6 @@ public class InterpreterCommandTests
         InterpreterCommand.Execute();
 
         queuePushStrategy.VerifyAll();
-
-    }
-        
+        Assert.Equal(1, queue.Count);
+    }    
 }
