@@ -13,12 +13,12 @@ public class CreateNewGameStrategy : IStrategy
         var gameLikeCommand = IoC.Resolve<ICommand>("GameCommand", gameQueue, scope);
         var gameMap = IoC.Resolve<IDictionary<int, ICommand>>("GameMap");
 
-        var commandList = new List<ICommand>((IEnumerable<ICommand>)gameLikeCommand);
+        IEnumerable<ICommand> commandList = new List<ICommand>();
         var macroCommand = IoC.Resolve<ICommand>("MacroGameCommand", commandList);
         var injectCommand = IoC.Resolve<ICommand>("InjectGameCommand", macroCommand);
         var repeatCommand = IoC.Resolve<ICommand>("RepeatGameCommand", injectCommand);
 
-        commandList.Add(repeatCommand);
+        commandList.Append(repeatCommand);
 
         gameMap.Add(gameId, injectCommand);
         return injectCommand;

@@ -15,6 +15,5 @@ public class DeleteNewGameCommand : ICommand
     {
         var gameScopeMap = IoC.Resolve<IDictionary<int, object>>("GameScopeMap");
         gameScopeMap.Remove(gameId);
-
     }
 }
