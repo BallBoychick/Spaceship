@@ -18,7 +18,7 @@ public class ScopeOfGameStrategy : IStrategy
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "GameQueuePopStrategy", (object[] args) => new GameQueuePopStrategy().RunStrategy(args)).Execute();
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "GetUobjectFromMapStrategy", (object[] args) => new GetUobjectFromMapStrategy().RunStrategy(args)).Execute();
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "RemoveUObjectFromMapStrategy", (object[] args) => new RemoveUObjectFromMapStrategy().RunStrategy(args)).Execute();
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "GetQuantum", (object[] args) => quantum).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "GetQuantum", (object[] args) => (object)quantum).Execute();
 
         gameScopeMap.Add(gameId, scope);
         IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", parentScope).Execute();
