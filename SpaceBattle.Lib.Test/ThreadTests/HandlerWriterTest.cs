@@ -19,6 +19,13 @@ public class HandlerWriterTests
 
         var str = File.ReadLines(path).ToList().Last();
 
+
         Assert.Equal("Error3", str);
+
+
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+        }
     }
 }
