@@ -1,5 +1,5 @@
 namespace SpaceBattle.Lib;
-
+using Hwdtech;
 public class GameQueuePopStrategy : IStrategy
 {
     public object RunStrategy(params object[] args)
@@ -7,6 +7,8 @@ public class GameQueuePopStrategy : IStrategy
         var id = (int)args[0];
         var cmd = (ICommand)args[1];
 
-        return new GameQueuePopCommand(id, cmd);
+        var queue = IoC.Resolve<Queue<ICommand>>("GetQueueOfGameById", id);
+
+        return queue.Dequeue();
     }
 }

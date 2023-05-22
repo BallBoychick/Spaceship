@@ -13,6 +13,9 @@ public class DeleteNewGameCommand : ICommand
 
     public void Execute()
     {
+        var gameMap = IoC.Resolve<IDictionary<int, IInjectable>>("GameMap");
+        var gameCommand = gameMap[gameId];
+        gameCommand.Inject(IoC.Resolve<ICommand>("GameEmptyCommand"));
         var gameScopeMap = IoC.Resolve<IDictionary<int, object>>("GameScopeMap");
         gameScopeMap.Remove(gameId);
     }
