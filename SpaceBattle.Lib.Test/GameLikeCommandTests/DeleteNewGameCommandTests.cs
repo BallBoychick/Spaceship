@@ -12,38 +12,31 @@ public class DeleteNewGameCommandTests
     {
         new InitScopeBasedIoCImplementationCommand().Execute();
         IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
+        int gameId = 123;
+
         var mockCommand = new Mock<ICommand>();
         mockCommand.Setup(x => x.Execute());
 
-        var gameMapMock = new Mock<IStrategy>();
-        gameMapMock.Setup(x => x.RunStrategy()).Returns(new Dictionary<int, IInjectable>());
+        var mockCommandInj = new Mock<IInjectable>();
+        mockCommandInj.Setup(x => x.Inject(mockCommand.Object));
 
-        // var gameEmptyCommandMock = new Mock<ICommand>();
-        // gameEmptyCommandMock.Setup(x => x.Execute());
+        var gameMapMock = new Mock<IStrategy>();
+        gameMapMock.Setup(x => x.RunStrategy()).Returns(new Dictionary<int, IInjectable>{ { gameId, mockCommandInj.Object } });
+
         var gameEmptyCommandMock = new Mock<IStrategy>();
-        gameEmptyCommandMock.Setup(x => x.RunStrategy(It.IsAny<ICommand>())).Returns(mockCommand.Object).Verifiable();
+        gameEmptyCommandMock.Setup(x => x.RunStrategy(It.IsAny<ICommand>())).Returns(false).Verifiable();
 
         var mockDictionary = new Mock<IStrategy>();
-        mockDictionary.Setup(x => x.RunStrategy()).Returns(new Dictionary<int, object>());
-        int gameId = 123;
+        mockDictionary.Setup(x => x.RunStrategy()).Returns(new Dictionary<int, object> { { gameId, IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))) } });
 
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "GameScopeMap", (object[] args) => mockDictionary.Object.RunStrategy(args)).Execute();
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "GameMap", (object[] args) => gameMapMock.Object.RunStrategy(args)).Execute();
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register","GameEmptyCommand", (object[] args) => gameEmptyCommandMock.Object.RunStrategy(args)).Execute(); 
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register","GameEmptyCommand", (object[] args) => gameEmptyCommandMock.Object.RunStrategy(args)).Execute();
 
-        
+        var map = IoC.Resolve<IDictionary<int, SpaceBattle.Lib.IInjectable>>("GameMap");
+        var empty = IoC.Resolve<ICommand>("GameEmptyCommand");
+        var mapScope = IoC.Resolve<IDictionary<int, object>>("GameScopeMap");
         var deleteNewGameCommand = new DeleteNewGameCommand(gameId);
         deleteNewGameCommand.Execute();
-        // var gameCommandMock = new Mock<ICommand>(); 
-        // gameMapMock.Setup(m => m[gameId]).Returns(gameCommandMock.Object);
-        // var gameCommandMock = new Mock<ICommand>(); 
-        // var strategyMock = new Mock<IStrategy>(); 
-        // gameMapMock.Setup(m => m[gameId]).Returns(strategyMock.Object);
-
-        //     var command = new DeleteNewGameCommand(gameId);
-
-        //     command.Execute();
-
-        //     Assert.NotNull(command);
     }
 }
