@@ -11,6 +11,5 @@ public class StartThreadCommand : ICommand
     public void Execute()
     {
         thread.StartThread();
-
     }
 }

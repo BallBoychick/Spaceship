@@ -1,27 +1,24 @@
 namespace SpaceBattle.Lib;
 
-public class StopThreadCommand : ICommand
+public class HardStopThreadCommand : ICommand
 {
     private ServerThread thread;
-
-    internal Action strategy;
-    public StopThreadCommand(ServerThread thread, Action strategy)
+    internal Action action = () => { };
+    public HardStopThreadCommand(ServerThread thread, Action action)
     {
-        this.strategy = strategy ?? (() => { thread.StopThread(); });
         this.thread = thread;
-
+        this.action = action;
     }
     public void Execute()
     {
         if (Thread.CurrentThread == thread.thread)
         {
-            strategy();
+            thread.StopThread();
+            action();
         }
         else
         {
             throw new Exception();
         }
-
     }
-
 }

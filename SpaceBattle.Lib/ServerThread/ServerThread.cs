@@ -5,7 +5,7 @@ public class ServerThread
     private bool stop = false;
     internal IReciever queue;
 
-    private Action strategy;
+    internal Action strategy;
     private object scope;
     internal Thread thread;
     public ServerThread(IReciever reciever, object scope)
