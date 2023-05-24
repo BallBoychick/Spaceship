@@ -13,8 +13,8 @@ namespace CoreWCFServer
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "/orders")]
         [OpenApiTag("Tag")]
-        [OpenApiResponse(ContentTypes = new[] { "application/json" }, Description = "Success", StatusCode = HttpStatusCode.OK, Type = typeof(ExampleContract))]
-        ExampleContract BodyEcho(
+        [OpenApiResponse(ContentTypes = new[] { "application/json" }, Description = "Success", StatusCode = HttpStatusCode.OK, Type = typeof(MessageContract))]
+        MessageContract HandleMessage(
             [OpenApiParameter(ContentTypes = new[] { "application/json" }, Description = "param description.")] MessageContract param);
     }
 }
