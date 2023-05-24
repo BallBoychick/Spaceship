@@ -23,6 +23,7 @@ public class DeleteNewGameCommandTests
         var gameMapMock = new Mock<IStrategy>();
         gameMapMock.Setup(x => x.RunStrategy()).Returns(new Dictionary<int, IInjectable>{ { gameId, mockCommandInj.Object } });
 
+        
         var gameEmptyCommandMock = new Mock<IStrategy>();
         gameEmptyCommandMock.Setup(x => x.RunStrategy(It.IsAny<ICommand>())).Returns(false).Verifiable();
 
@@ -38,5 +39,7 @@ public class DeleteNewGameCommandTests
         var mapScope = IoC.Resolve<IDictionary<int, object>>("GameScopeMap");
         var deleteNewGameCommand = new DeleteNewGameCommand(gameId);
         deleteNewGameCommand.Execute();
+
+        Assert.Empty(mapScope);
     }
 }
