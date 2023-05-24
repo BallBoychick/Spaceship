@@ -1,6 +1,6 @@
 namespace SpaceBattle.Lib;
 
-class ActionCommand : ICommand
+public class ActionCommand : ICommand
 {
     private Action action;
 

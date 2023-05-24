@@ -46,10 +46,6 @@ public class ServerThread
 
     }
 
-    internal void ChangeBehaviour(Action changeBehaviour)
-    {
-        strategy = changeBehaviour;
-    }
 
     internal void HandleCommand()
     {

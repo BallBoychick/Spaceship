@@ -9,10 +9,6 @@ using System.Threading;
 
 public class ServerThreadTests
 {
-    public ServerThreadTests()
-    {
-
-    }
     private void InitState()
     {
         new InitScopeBasedIoCImplementationCommand().Execute();
@@ -26,16 +22,14 @@ public class ServerThreadTests
         }).Execute();
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Hard Stop Command", (object[] param) => {
             var thread = IoC.Resolve<ServerThread>("Threads." + (string)param[0]);
-            return new HardStopThreadCommand(thread, (Action)param[1]);
+            var hardStopCommand = new HardStopThreadCommand(thread, (Action)param[1]);
+            return IoC.Resolve<Lib.ICommand>("Send Command",  (string)param[0], hardStopCommand);
             }).Execute();
-        // IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Soft Stop Command", (object[] param) =>
-        // {
-        //     var softStopThreadCommand = new Mock<Lib.ICommand>();
-        //     softStopThreadCommand.Setup(x => x.Execute()).Callback(() => new SoftStopThreadStrategy().RunStrategy(param)); return softStopThreadCommand.Object;
-        // }).Execute();
-
-
-
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Soft Stop Command", (object[] param) => {
+            var thread = IoC.Resolve<ServerThread>("Threads." + (string)param[0]);
+            var softStopCommand =  new SoftStopThreadCommand(thread, (Action)param[1]);
+            return IoC.Resolve<Lib.ICommand>("Send Command",  (string)param[0], softStopCommand);
+            }).Execute();
 
     }
 
@@ -100,8 +94,11 @@ public class ServerThreadTests
         Assert.True(isDoneFirstCommand);
         var mreSoftStop = new ManualResetEvent(false);
         var mreTwo = new ManualResetEvent(false);
-        var cmd = IoC.Resolve<Lib.ICommand>("Soft Stop Command", "1", () => { mreSoftStop.WaitOne(10000); });
-        cmd.Execute();
+        var actionCommand = new ActionCommand(()=> {mreSoftStop.WaitOne(10000);});
+        ;
+        var cmd = IoC.Resolve<Lib.ICommand>("Soft Stop Command", "1", ()=>{});
+        var macrocommand = new MacroCommand(new List<Lib.ICommand>(){actionCommand, cmd} );
+        IoC.Resolve<Lib.ICommand>("Send Command", "1", macrocommand);
         var mockCommandTwo = new Mock<Lib.ICommand>();
         mockCommandTwo.Setup(x => x.Execute()).Callback(() => { mreTwo.Set(); });
         IoC.Resolve<Lib.ICommand>("Send Command", "1", mockCommandTwo.Object).Execute();
@@ -125,7 +122,6 @@ public class ServerThreadTests
     {
 
         InitState();
-        Action action = () => { };
         var startFirstThreadCommand = IoC.Resolve<Lib.ICommand>("Create And Start Thread", "1");
         startFirstThreadCommand.Execute();
         var thread1 = IoC.Resolve<ServerThread>("Threads.1");
@@ -159,7 +155,7 @@ public class ServerThreadTests
         var thread2 = IoC.Resolve<ServerThread>("Threads.2");
         var mre = new ManualResetEvent(false);
         var mockCommandNotifyAndStop = new Mock<Lib.ICommand>();
-        var stopThreadCommand = new StopThreadCommand(thread2, action);
+        var stopThreadCommand = new HardStopThreadCommand(thread2, ()=>{});
         mockCommandNotifyAndStop.Setup(x => x.Execute()).Callback(() =>
         {
             stopThreadCommand.Execute();
@@ -174,8 +170,8 @@ public class ServerThreadTests
 
         Assert.True(wasException);
 
-        IoC.Resolve<Lib.ICommand>("Hard Stop Command", "1").Execute();
+        IoC.Resolve<Lib.ICommand>("Hard Stop Command", "1", ()=>{}).Execute();
 
-        IoC.Resolve<Lib.ICommand>("Soft Stop Command", "2").Execute();
+        IoC.Resolve<Lib.ICommand>("Soft Stop Command", "2", ()=> {}).Execute();
     }
 }
