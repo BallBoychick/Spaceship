@@ -8,6 +8,7 @@ public class ServerThread
     internal Action strategy;
     private object scope;
     internal Thread thread;
+
     public ServerThread(IReciever reciever, object scope)
     {
         queue = reciever;
@@ -18,17 +19,9 @@ public class ServerThread
         };
         thread = new Thread(() =>
         {
-            IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", scope).Execute();
             while (!stop)
             {
-                try
-                {
-                    strategy();
-                }
-                catch (Exception e)
-                {
-                    IoC.Resolve<ICommand>("Exception Handler.Add", e).Execute();
-                }
+                strategy();
             }
         }
          );
@@ -50,6 +43,14 @@ public class ServerThread
     internal void HandleCommand()
     {
         ICommand command = queue.Recieve();
-        command.Execute();
+
+        try
+        {
+            command.Execute();
+        }
+        catch (Exception e)
+        {
+            IoC.Resolve<ICommand>("Exception Handler", e, command).Execute();
+        }
     }
 }

@@ -126,17 +126,18 @@ public class ServerThreadTests
         startFirstThreadCommand.Execute();
         var thread1 = IoC.Resolve<ServerThread>("Threads.1");
         var mockRegisterExceptionHandler = new Mock<Lib.ICommand>();
-        var exceptionHandlerDict = new Dictionary<string, object>();
+        var exceptionHandlerDict = new Dictionary<object, object>();
         var MRE = new ManualResetEvent(false);
+        var mockCMD = new Mock<Lib.ICommand>();
         mockRegisterExceptionHandler.Setup(x => x.Execute()).Callback(() =>
         {
-            IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Exception Handler.Add", (object[] param) =>
+            IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Exception Handler", (object[] param) =>
             {
-                var mockCMD = new Mock<Lib.ICommand>();
+                
                 mockCMD.Setup(x => x.Execute()).Callback(() =>
                 {
-                    exceptionHandlerDict.Add("Exception in Thread", (Exception)param[0]);
-                });
+                    exceptionHandlerDict.Add((Lib.ICommand) param[1], (Exception)param[0]);
+                }).Verifiable();
 
 
                 return mockCMD.Object;
@@ -164,12 +165,7 @@ public class ServerThreadTests
 
         IoC.Resolve<Lib.ICommand>("Send Command", "1", mockCommandNotifyAndStop.Object).Execute();
         mre.WaitOne(10000);
-        var exceptionHandler = IoC.Resolve<Dictionary<string, object>>("Exception Handler");
-
-        var wasException = exceptionHandler.ContainsKey("Exception in Thread");
-
-        Assert.True(wasException);
-
+        mockCMD.Verify();
         IoC.Resolve<Lib.ICommand>("Hard Stop Command", "1", ()=>{}).Execute();
 
         IoC.Resolve<Lib.ICommand>("Soft Stop Command", "2", ()=> {}).Execute();
