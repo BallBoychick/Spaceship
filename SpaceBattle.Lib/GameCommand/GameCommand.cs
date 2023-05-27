@@ -21,6 +21,10 @@ public class GameCommand : ICommand
         IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", Scope).Execute();
         do
         {
+            if(Queue.IsEmpty())
+            {
+                break;
+            }
             ICommand command = Queue.Recieve();
             try
             {
