@@ -21,7 +21,7 @@ public class GameCommand : ICommand
         IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", Scope).Execute();
         do
         {
-            if(Queue.IsEmpty())
+            if (Queue.IsEmpty())
             {
                 break;
             }
@@ -35,6 +35,7 @@ public class GameCommand : ICommand
             {
                 IoC.Resolve<ICommand>("Exception Handler", e, command).Execute();
             }
+
 
         }
         while (quant <= this.stopwatch.ElapsedMilliseconds);
