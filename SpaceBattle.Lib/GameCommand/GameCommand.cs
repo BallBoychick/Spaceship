@@ -5,19 +5,19 @@ public class GameCommand : ICommand
 {
     private IReciever Queue;
     private object Scope;
+    private Stopwatch stopwatch;
     public GameCommand(IReciever Queue, object Scope)
     {
         this.Queue = Queue;
         this.Scope = Scope;
+        this.stopwatch = new Stopwatch();
+        stopwatch.Start();
 
     }
 
     public void Execute()
     {
-      
-        var stopWatch = new Stopwatch();
         var quant = IoC.Resolve<double>("Quant");
-        stopWatch.Start();
         IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", Scope).Execute();
         do
         {
@@ -33,7 +33,7 @@ public class GameCommand : ICommand
             }
 
         }
-        while (quant < stopWatch.ElapsedTicks);
-        stopWatch.Stop();
+        while (quant <= this.stopwatch.ElapsedMilliseconds);
+        stopwatch.Reset();
     }
 }
