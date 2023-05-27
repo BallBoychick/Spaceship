@@ -29,7 +29,7 @@ public class NewOperationStrategyTests
 
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "GameRules.Rotate", (object[] args) => listOfRulesStrategy.Object.RunStrategy(args)).Execute();
         IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "CreateGameCommand.Check", (object[] args) => checkCommandStrategy.Object.RunStrategy(args)).Execute();
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "CreateGameMacroCommand", (object[] args) => checkCommandStrategy.Object.RunStrategy(args)).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "CreateGameMacroCommand", (object[] args) => new MacroCommand(new List<ICommand>(){checkCommand.Object})).Execute();
 
 
 
@@ -43,13 +43,12 @@ public class NewOperationStrategyTests
 
         var obj = new Mock<IUObject>();
 
-        // var result = IoC.Resolve<ICommand>("NewGameOperation", obj.Object, "Rotate");
+        var result = IoC.Resolve<ICommand>("NewGameOperation", obj.Object, "Rotate");
 
-        // Assert.IsType<MacroCommand>(result);
+        Assert.IsType<MacroCommand>(result);
 
-        // result.Execute();
+        result.Execute();
 
-        // checkCommand.VerifyAll();
-
+        checkCommand.VerifyAll();
     }
 }
