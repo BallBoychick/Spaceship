@@ -94,11 +94,16 @@ public class GameCommandTests
             IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Exception Handler", (object[] param) =>
             {
 
-                if (exceptionHandlerDict.ContainsKey((Lib.ICommand)param[1]))
+                var command = (Lib.ICommand)param[1];
+
+                if (exceptionHandlerDict.ContainsKey(command))
                 {
                     return mockCMD.Object;
-
                 }
+                var exception = (Exception)param[0];
+                exception.Data["command"] = command;
+                mockDefault.Setup(x => x.Execute()).Throws(exception).Verifiable();
+
                 return mockDefault.Object;
             }).Execute();
         });
@@ -135,18 +140,22 @@ public class GameCommandTests
         var mockCMD = new Mock<Lib.ICommand>();
         mockCMD.Setup(x => x.Execute()).Callback(() => { });
         var mockDefault = new Mock<Lib.ICommand>();
-        mockDefault.Setup(x => x.Execute()).Callback(() => { }).Verifiable();
+
         var exceptionHandlerDict = new Dictionary<object, object>();
         mockRegisterExceptionHandler.Setup(x => x.Execute()).Callback(() =>
         {
             IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Exception Handler", (object[] param) =>
             {
+                var command = (Lib.ICommand)param[1];
 
-                if (exceptionHandlerDict.ContainsKey((Lib.ICommand)param[1]))
+                if (exceptionHandlerDict.ContainsKey(command))
                 {
                     return mockCMD.Object;
-
                 }
+                var exception = (Exception)param[0];
+                exception.Data["command"] = command;
+                mockDefault.Setup(x => x.Execute()).Throws(exception).Verifiable();
+
                 return mockDefault.Object;
             }).Execute();
         });

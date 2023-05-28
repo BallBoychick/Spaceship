@@ -11,7 +11,7 @@ public class GameCommand : ICommand
         this.Queue = Queue;
         this.Scope = Scope;
         this.stopwatch = new Stopwatch();
-        stopwatch.Start();
+        
 
     }
 
@@ -19,6 +19,7 @@ public class GameCommand : ICommand
     {
         var quant = IoC.Resolve<double>("Quant");
         IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", Scope).Execute();
+        stopwatch.Start();
         do
         {
             if (Queue.IsEmpty())
