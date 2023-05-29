@@ -7,9 +7,9 @@ public class CodeStringAdapterBuilder : IBuilder
 {
 
     private string ClassName;
-    private  property[] Properties;
+    private  Property[] Properties;
 
-    public CodeStringAdapterBuilder(string className,  property[] properties)
+    public CodeStringAdapterBuilder(string className,  Property[] properties)
     {
         this.ClassName = className;
         this.Properties = properties;

@@ -1,13 +1,13 @@
 
 namespace SpaceBattle.Lib;
 
-public class property
+public class Property
 {
     public string name;
     public string type;
     public bool get;
-    bool set;
-    public property(string name, string type, bool get, bool set){
+    public bool set;
+    public Property(string name, string type, bool get, bool set){
         this.name = name;
         this.type = type;
         this.get = get;
