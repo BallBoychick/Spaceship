@@ -7,20 +7,21 @@ public class CodeStringAdapterBuilder : IBuilder
 {
 
     private string ClassName;
-    private  List<property> Properties;
+    private  property[] Properties;
 
-    public CodeStringAdapterBuilder(string className,  List<property> properties)
+    public CodeStringAdapterBuilder(string className,  property[] properties)
     {
         this.ClassName = className;
         this.Properties = properties;
 
     }
+    
 
     public string Build()
     {
         var templateText = IoC.Resolve<string>("Template");
         var template = Template.Parse(templateText);
-        var result = template.Render(new {ClassName = this.ClassName, Properties = this.Properties});
+        var result = template.Render(new {name = this.ClassName, properties = this.Properties});
         return result;
     }
 }

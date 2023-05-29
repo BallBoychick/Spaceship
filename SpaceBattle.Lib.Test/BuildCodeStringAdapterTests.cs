@@ -17,31 +17,37 @@ public class BuildCodeStringAdapterTests
         IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
         Type type = typeof(IMovable);
         var properties = type.GetProperties().Select( p => new property(p.Name, p.PropertyType.Name, p.CanRead,p.CanWrite){
-            }).ToList()
+            }).ToArray()
             ;
 
         var builder = new CodeStringAdapterBuilder(className: "MovableAdapter", properties: properties);
-        //item["name"] item[""get]
         
 
 var t = @"using System;
 
-public class {{a.ClassName }}
+public class {{name }}
 {
-    {{ for property in Properties}}
+    private object obj;
+    {{ for property in properties }}
     public {{ property.type }} {{ property.name }}
-    
+    {{if property.set}}
+    {
+        Hwdtech.IoC.Resolve<SpaceBattle.Lib.ICommand>(""{{property.name}}.Set"", obj, value).Execute();
+    }
+{{end}}  
     {{if property.get}}
                {
                         return Hwdtech.IoC.Resolve<{{property.type}}>(""{{property.name}}.Get"", obj);
                 } 
-{{ end}}
+{{ end }}
 
-    {{if property.set}}
-{
-{{end}}    
+      
     {{ end }}
-}}";
+    public {{ name }}(object obj)
+    {
+        this.obj = obj;
+    }
+}";
     IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Template", (object []par)=> t).Execute();
     
     var result = builder.Build();
