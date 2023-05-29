@@ -13,6 +13,8 @@ public class ShootCommand : ICommand
 
     public void Execute()
     {
-        IoC.Resolve<ICommand>("GameQueuePushStrategy", IoC.Resolve<Queue<ICommand>>("GameQueueGetStrategy"), IoC.Resolve<ICommand>("GameShootStrategy", obj)).Execute();
+        var proj = IoC.Resolve<object>("Game.Create.Projectile", obj.ProjectileType);
+        var cmd = IoC.Resolve<ICommand>("Game.Create.Projectile.Command.Move", proj, obj.Pos, obj.Velocity);
+        IoC.Resolve<SpaceBattle.Lib.ICommand>("GameQueuePushStrategy", IoC.Resolve<int>("GetGameQueueOfGameById"), cmd).Execute();
     }
 }

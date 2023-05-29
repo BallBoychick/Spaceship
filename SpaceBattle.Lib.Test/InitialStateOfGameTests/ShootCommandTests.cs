@@ -11,40 +11,26 @@ public class ShootCommandTests
     {
         new InitScopeBasedIoCImplementationCommand().Execute();
         IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
-
-
         var queue = new Queue<ICommand>();
 
         var cmd = new Mock<SpaceBattle.Lib.ICommand>();
-        cmd.Setup(x => x.Execute()).Callback(() => {});
 
-        var pushCommand = new Mock<ICommand>();
-        pushCommand.Setup(c => c.Execute()).Callback(() => queue.Enqueue(cmd.Object)).Verifiable();
-
-        var queueStrategy = new Mock<IStrategy>();
-        queueStrategy.Setup(x => x.RunStrategy()).Returns(queue).Verifiable();
-
-        var shootStrategy = new Mock<IStrategy>();
-        shootStrategy.Setup(x => x.RunStrategy(It.IsAny<object[]>())).Returns(cmd.Object).Verifiable();
-
-        var pushStrategy = new Mock<IStrategy>();
-
-        pushStrategy.Setup(x => x.RunStrategy(It.IsAny<Queue<ICommand>>(), It.IsAny<ICommand>())).Returns(pushCommand.Object).Verifiable();
-
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "GameQueueGetStrategy", (object[] args) => queueStrategy.Object.RunStrategy(args)).Execute();
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "GameShootStrategy", (object[] args) => shootStrategy.Object.RunStrategy(args)).Execute();
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "GameQueuePushStrategy", (object[] args) => pushStrategy.Object.RunStrategy(args)).Execute();
+        var obj = new Mock<object>();
+        var getid = new Mock<IStrategy>();
+        getid.Setup(s => s.RunStrategy()).Returns(1).Verifiable();
+        
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "GameQueuePushStrategy", (object[] args) => new ActionCommand(() =>
+        queue.Enqueue((SpaceBattle.Lib.ICommand)args[1]))).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "GetGameQueueOfGameById", (object[] args) => getid.Object.RunStrategy(args)).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Create.Projectile", (object[] args) => obj.Object).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Create.Projectile.Command.Move", (object[] args) => cmd.Object).Execute();
 
 
 
-        var obj = new Mock<IShootable>();
-        var ShootCommand = new ShootCommand(obj.Object);
+        var obj2 = new Mock<IShootable>();
+        var ShootCommand = new ShootCommand(obj2.Object);
         ShootCommand.Execute();
 
         Assert.True(queue.Count() == 1);
-        queueStrategy.VerifyAll();
-        pushCommand.VerifyAll();
-        shootStrategy.Verify();
-        pushStrategy.Verify();
     }
 }
