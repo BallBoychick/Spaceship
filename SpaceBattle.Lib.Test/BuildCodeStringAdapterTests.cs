@@ -16,12 +16,11 @@ public class BuildCodeStringAdapterTests
         new InitScopeBasedIoCImplementationCommand().Execute();
         IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
         Type type = typeof(IMovable);
-        var properties = type.GetProperties().Select(p => new Property(p.Name, p.PropertyType.Name, p.CanRead, p.CanWrite)
-        {
-        }).ToArray()
-            ;
-
-        var builder = new CodeStringAdapterBuilder(className: "MovableAdapter", properties: properties);
+        var builder = new CodeStringAdapterBuilder(className: "MovableAdapter");
+        type.GetProperties().ToList().ForEach( (property) => builder.AddMember(new {name = property.Name,
+        type = property.PropertyType.Name,
+        get = property.CanRead,
+        set = property.CanWrite}));
 
 
         var t = @"using System;
